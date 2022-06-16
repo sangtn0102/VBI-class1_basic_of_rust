@@ -6,7 +6,7 @@
 // Mục đích: giải quyết vấn đề ownership and borrowing không dùng clone()
 // fn main() {
     
-//     let x = change_value(10,20);
+//     let x = change_value(10, &mut 20);
 // }
 
 
@@ -34,7 +34,7 @@
 
 //     while count < 10 {
 //         num += 2;
-//         if vector_is_prime(num, primes) {
+//         if vector_is_prime(num, &primes) {
 //             count += 1;
 //             primes.push(num);
 //         }
@@ -42,8 +42,8 @@
 //     println!("{:?}", primes);
 // }
 
-// fn vector_is_prime(num: u64, p: Vec<u64>) -> bool {
-//     for i in p {
+// fn vector_is_prime(num: u64, p: &Vec<u64>) -> bool {
+//     for &i in p {
 //         if num > i && num % i != 0 {
 //             return false;
 //         }
@@ -63,7 +63,7 @@
 //     let mut max = 0;
     
 //     //for n in &mut values {
-//     for n in v {
+//     for n in &mut *v {
 //         max = std::cmp::max(max, *n);
 //     }
 
@@ -81,17 +81,17 @@
 // Mục đích : giải quyết vấn đề ownership và borrowing ko dùng clone()
 // Logic hiện tại đang sai (cho 1 vec -> đảo chiều vector đó)
 fn main(){
-    let  a = vec![1,2,3,4,5];
+    let  mut a = vec![1,2,3,4,5];
     let  i = 0;
     let c = 0;
     loop {
-        let (a, c) = test(a);
+        let (a, c) = test(&mut a);
         println!("{}",c);
         if i >=5 {break;}
     }
 }
 
-pub fn test(mut a: Vec<u8>) -> (Vec<u8>, i32) {
+pub fn test(a: &mut Vec<u8>) -> (Vec<u8>, i32) {
     let mut b:Vec<u8>  = Vec::new();
     let mut c:u8 = 0;
     loop {
