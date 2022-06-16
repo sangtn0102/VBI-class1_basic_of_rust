@@ -32,19 +32,19 @@
 //     let mut primes: Vec<u64> = Vec::new();
 //     primes.push(2);
 
-//     while count < 10 {
-//         num += 2;
+//     while count < 1000 {
+//         num += 1;
 //         if vector_is_prime(num, &primes) {
-//             count += 1;
 //             primes.push(num);
 //         }
+//         count += 1;
 //     }
 //     println!("{:?}", primes);
 // }
 
 // fn vector_is_prime(num: u64, p: &Vec<u64>) -> bool {
 //     for &i in p {
-//         if num > i && num % i != 0 {
+//         if num > i && num % i == 0 {
 //             return false;
 //         }
 //     }
